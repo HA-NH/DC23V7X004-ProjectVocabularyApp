@@ -55,10 +55,7 @@ class ResultScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         'Tỷ lệ chính xác: ${percent.toStringAsFixed(1)}%',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey,
-                        ),
+                        style: const TextStyle(fontSize: 18, color: Colors.grey),
                       ),
                     ],
                   ),
@@ -84,10 +81,8 @@ class ResultScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '🔹 Từ: ${item['word'] ?? ''}',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                          Text('🔹 Từ: ${item['word'] ?? ''}',
+                              style: const TextStyle(fontWeight: FontWeight.bold)),
                           Text('✅ Đáp án đúng: ${item['correct'] ?? ''}'),
                           Text('❌ Bạn chọn: ${item['selected'] ?? ''}'),
                           const Divider(),
