@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/list_screen.dart';
+import 'screens/detail_screen.dart';
 
 void main() {
   runApp(const VocabularyApp());
@@ -17,7 +18,7 @@ class VocabularyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const ListScreen(),
-        '/detail': (context) => const Placeholder(),
+        '/detail': (context) => const DetailScreen(),
       },
     );
   }
