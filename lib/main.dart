@@ -22,7 +22,8 @@ class VocabularyApp extends StatelessWidget {
         '/': (context) => const ListScreen(),
         '/detail': (context) => const DetailScreen(),
         '/quiz': (context) => const QuizScreen(),
-        '/result': (context) => const ResultScreen(score: 0, total: 0), // placeholder
+        '/result': (context) =>
+            const ResultScreen(score: 0, total: 0), // placeholder
       },
     );
   }

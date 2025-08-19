@@ -5,7 +5,17 @@ class Word {
   final String meaning;
   final String example;
 
-  Word({required this.word, required this.type, required this.meaning, required this.example});
+  bool isFavorite;
+  bool isLearned;
+
+  Word({
+    required this.word,
+    required this.type,
+    required this.meaning,
+    required this.example,
+    this.isFavorite = false,
+    this.isLearned = false,
+  });
 
   factory Word.fromJson(Map<String, dynamic> json) {
     return Word(
@@ -13,13 +23,17 @@ class Word {
       type: json['type'],
       meaning: json['meaning'],
       example: json['example'],
+      isFavorite: json['isFavorite'] ?? false,
+      isLearned: json['isLearned'] ?? false,
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'word': word,
-    'type': type,
-    'meaning': meaning,
-    'example': example,
-  };
+        'word': word,
+        'type': type,
+        'meaning': meaning,
+        'example': example,
+        'isFavorite': isFavorite,
+        'isLearned': isLearned,
+      };
 }
