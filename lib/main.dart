@@ -1,0 +1,24 @@
+import 'package:flutter/material.dart';
+import 'screens/list_screen.dart';
+
+void main() {
+  runApp(const VocabularyApp());
+}
+
+class VocabularyApp extends StatelessWidget {
+  const VocabularyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Vocabulary Learning App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const ListScreen(),
+        '/detail': (context) => const Placeholder(),
+      },
+    );
+  }
+}
