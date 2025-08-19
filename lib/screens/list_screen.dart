@@ -16,7 +16,7 @@ class _ListScreenState extends State<ListScreen> {
   @override
   void initState() {
     super.initState();
-    _wordsFuture = JsonLoader.loadWords(); // Load dữ liệu từ JSON
+    _wordsFuture = JsonLoader.loadWords();
   }
 
   @override
@@ -27,27 +27,48 @@ class _ListScreenState extends State<ListScreen> {
         future: _wordsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator()); // Hiển thị loading
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Lỗi tải dữ liệu: ${snapshot.error}')); // Xử lý lỗi
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(child: Text('Lỗi tải dữ liệu: ${snapshot.error}'));
+          }
+
+          final words = snapshot.data;
+
+          if (words == null || words.isEmpty) {
             return const Center(child: Text('Không có từ vựng nào.'));
           }
 
-          final words = snapshot.data!;
-          return ListView.builder(
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
             itemCount: words.length,
+            separatorBuilder: (_, __) => const SizedBox(height: 4),
             itemBuilder: (context, index) {
               final word = words[index];
               return VocabCard(
                 word: word,
                 onTap: () {
-                  // Điều hướng sang màn hình chi tiết
                   Navigator.pushNamed(context, '/detail', arguments: word);
                 },
               );
             },
           );
+        },
+      ),
+      floatingActionButton: FutureBuilder<List<Word>>(
+        future: _wordsFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.hasData &&
+              snapshot.data!.isNotEmpty) {
+            return FloatingActionButton.extended(
+              onPressed: () => Navigator.pushNamed(context, '/quiz'),
+              icon: const Icon(Icons.quiz),
+              label: const Text('Làm Quiz'),
+            );
+          }
+          return const SizedBox.shrink(); // Ẩn nút khi chưa sẵn sàng
         },
       ),
     );
